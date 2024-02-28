@@ -5,11 +5,15 @@
         <h1>Gifts</h1>
       </div>
     </section>
+
+    <section class="row">
+      {{ gifts }}
+    </section>
   </div>
 </template>
 
 <script>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import Pop from '../utils/Pop.js';
 import { giftsService } from '../services/GiftsService.js'
 import { AppState } from '../AppState.js';
@@ -29,7 +33,7 @@ export default {
       getGifts()
     })
     return {
-
+      gifts: computed(() => AppState.gifts)
     }
   }
 }
