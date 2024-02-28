@@ -7,7 +7,10 @@
     </section>
 
     <section class="row">
-      {{ gifts }}
+      <div v-for="gift in gifts" :key="gift.id" class="col-md-4">
+        <img :src="gift.url" class="img-fluid" alt="">
+        <p>{{ gift.tag }}</p>
+      </div>
     </section>
   </div>
 </template>
