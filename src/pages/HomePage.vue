@@ -7,9 +7,15 @@
     </section>
 
     <section class="row">
-      <div v-for="gift in gifts" :key="gift.id" class="col-md-4">
-        <img :src="gift.url" class="img-fluid" alt="">
-        <p>{{ gift.tag }}</p>
+      <div v-for="gift in gifts" :key="gift.id" class="col-md-4 mb-3">
+        <div class="card">
+          <img :src="gift.url" class="img-fluid card-img-top" alt="">
+          <div class="card-body">
+            <p>{{ gift.tag }}</p>
+            <button @click="openGift(gift.id)" v-if="!gift.opened" class="btn btn-success">Open Gift</button>
+          </div>
+
+        </div>
       </div>
     </section>
   </div>
@@ -36,7 +42,15 @@ export default {
       getGifts()
     })
     return {
-      gifts: computed(() => AppState.gifts)
+      gifts: computed(() => AppState.gifts),
+
+      async openGift(giftId) {
+        try {
+          await giftsService.updateGift(giftId)
+        } catch (error) {
+          Pop.error(error)
+        }
+      }
     }
   }
 }
