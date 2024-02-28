@@ -9,7 +9,9 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
+    component: loadPage('HomePage'),
+    // NOTE user must be logged in to access and load page, otherwise is prompted to  log in with auth0
+    beforeEnter: authGuard
   },
   {
     path: '/about',
